@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="page-wrapper" style="min-height: 250px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="application-detail-heading-area">
+                    <h2 class="noti_detail">Notification Detail</h2>
+                </div>
+                <div class="admin-detail-main-area">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="admin-detail-list-area">
+                                <div class="admin-name-img-area">
+                                    <div class="admin-name-area">
+                                        <h4>Title: <span>{{notification.title}}</span></h4>
+                                    </div>
+                                </div>
+                                <div class="admin-contact-detail-area">
+                                    <h4>Sender: <span>{{notification.sender}}</span></h4>
+                                    <h4>Message: <span>{{notification.message}}</span></h4>
+                                    <h4>Recipient: <span>{{notification.recipient}}</span></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="admin-contact-detail-area">
+                                <h4>Created On: <span>{{notification.created_at}}</span></h4>
+                                <h4>Is Seen: <span>{{notification.is_seen}}</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

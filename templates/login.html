@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Tailor Find</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/logo.png' %}">
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <div class="forget-password-detail-area">
+            <div class="forget-password-left-area left_area">
+                <a href="/">
+                    <img src="{% static 'images/logo.png' %}" height="120px" alt="logo-img">
+                </a>
+            </div>
+            <div class="forget-password-input-area right_area_back-image">
+                <div class="forget-password-left-area">
+                    <a href="/">
+                        <img src="{% static 'images/logo.png' %}" height="140px" alt="logo-img">
+                    </a>
+                </div>
+                <form class="contact-form-main-area" action="" method="post" id="paymentFrm">
+                    {% csrf_token %}
+                    <div class="right_area">
+                        <div class="login">
+                            <h2>Login In</h2>
+                        </div>
+                        {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags %}
+                        <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        <div class="login-input-box">
+                            <input type="text" id="phone" name="phone" class="form-control input_area"
+                                placeholder="Enter Phone" maxlength="16" required>
+                        </div>
+                        <div class="login-input-box">
+                            <input type="password" id="password" name="password" class="form-control input_area"
+                                placeholder="Enter Password" maxlength="16" required>
+                        </div>
+                        <div class="login-resset-btn-area">
+                            <div class="email-submit-btn-area submit_area">
+                                <button type="submit" class="email-submit-btn btn_submit">Submit</button>
+                            </div>
+                        </div>
+                        <div class="footer-copyright-main-area copyright_area">
+                            <p class="change_color">2022 © All rights reserved. <a href="/"
+                                    class="footer_link">Tailor Find</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'plugins/bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/app-style-switcher.js' %}"></script>
+    <script src="{% static 'js/waves.js' %}"></script>
+    <script src="{% static 'js/sidebarmenu.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+</html>

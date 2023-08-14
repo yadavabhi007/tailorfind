@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="page-wrapper wrapper_page" style="min-height: 250px;">
+  <div class="container-fluid white_bg">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="application-detail-heading-area">
+          <h2 class="noti_detail">Manage Terms And Conditions</h2>
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags %}
+        <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <div class="manage-admins-main-area">
+          <div class="manage-admins-table-area">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Sr No</th>
+                  <th>Terms And Conditions</th>
+                  <th>Created On</th>
+                  <th>updated On</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if terms_and_conditions %}
+                {% for terms_and_conditions in terms_and_conditions %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{terms_and_conditions.description| safe}}</td>
+                  <td>{{terms_and_conditions.created_at}}</td>
+                  <td>{{terms_and_conditions.updated_at}}</td>
+                  <td>
+                    <a href="{% url 'update-terms-and-conditions' terms_and_conditions.id %}" class="mange-admins-edit-btn"><i
+                        class="fas fa-edit"></i></a>
+                  </td>
+                </tr>
+               
+                {% endfor %}
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,165 @@
+
+ 
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<style>
+  .manage-admins-table-area .modal-dialog {
+    max-width: 420px;
+}
+h5#CustomerLabelDel66 {
+    font-weight: 600;
+    font-size: 17px;
+}
+.manage-admins-table-area .modal-header {
+    background: var(--orangeColor);
+}
+.manage-admins-table-area button.download-invoice-btn {
+    border: unset;
+    background: black;
+    color: white;
+    padding: 5px 20px;
+    font-weight: 500;
+    border-radius: 5px;
+}
+.manage-admins-table-area.modal-footer {
+    margin: auto;
+}
+.manage-admins-table-area .modal-body.my-4 {
+    text-align: center;
+}
+</style>
+<div class="page-wrapper wrapper_page" style="min-height: 250px;">
+  <div class="container-fluid white_bg">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="application-detail-heading-area">
+          <h2 class="noti_detail">Manage Customers</h2>
+        </div>
+        <div id="msg" class="alert alert-danger" style="display:none;"></div>
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags %}
+        <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <div class="table-data-search-box">
+          <div class="search">
+            <a href="{% url 'create-customer' %}" class="searchTerm">Create Customer</a>
+          </div>
+        </div>
+        <div class="manage-admins-main-area">
+          <div class="manage-admins-table-area">
+            <table class="table" id="example1">
+              <thead>
+                <tr>
+                  <th>Sr No</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Phone</th>
+                  <th>Created On</th>
+                  <th>View Details</th>
+                  <th>Action</th>
+                  <th>Active/Inactive</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if customers %}
+                {% for customer in customers %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{customer.first_name|default:''}}</td>
+                  <td>{{customer.last_name|default:''}}</td>
+                  <td>{{customer.phone|default:''}}</td>
+                  <td style="text-align:center;">{{customer.created_at|default:''}}</td>
+                  <td style=" "><a href="{% url 'customer-detail' customer.id %}"
+                      class="mange-admins-edit-btn"><i class="fas fa-eye"></i></a></td>
+                  <td>
+                    <a href="{% url 'update-customer' customer.id %}" class="mange-admins-edit-btn"><i
+                        class="fas fa-edit"></i></a>
+                    <a data-bs-toggle="modal" data-bs-target="#CustomerDel{{customer.id}}"
+                      class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                  </td>
+                  <td>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox activate-btn"
+                        id="myonoffswitch-1{{customer.id}}" data-user-id="{{customer.id}}" {% if customer.is_active %} checked {% endif %}>
+                      <label class="onoffswitch-label" for="myonoffswitch-1{{customer.id}}">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <div class="modal fade" id="CustomerDel{{customer.id}}" tabindex="-1"
+                  aria-labelledby="CustomerLabelDel{{customer.id}}" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content innerDiv-model-dialog">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="CustomerLabelDel{{customer.id}}">Delete
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <hr class="p-0 m-0">
+                      <div class="modal-body my-4">
+                        Are You Sure, Really Want To Delete ?
+                      </div>
+                      <hr class="p-0 m-0">
+                      <div class="modal-footer">
+                        <button type="button" class="download-invoice-btn" data-bs-dismiss="modal">Close</button>
+                        <a href="{% url 'delete-customer' customer.id %}"><button type="button"
+                            class="download-invoice-btn">Delete</button></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.activate-btn').click(function (e) {
+      e.preventDefault();
+      var user_id = $(this).data('user-id');
+      $.ajax({
+        url: '{% url "activate-user" %}',
+        data: { 'user_id': user_id },
+        dataType: 'json',
+        success: function (response) {
+          //var customer = response.customer;
+          //var html = `
+          //<div class="onoffswitch">
+          //  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox activate-btn" id="myonoffswitch-1${customer.id}" data-user-id="${customer.id}" ${customer.is_active ? 'checked' : ''}>
+          //  <label class="onoffswitch-label" for="myonoffswitch-1${customer.id}">
+          //   <span class="onoffswitch-inner"></span>
+          //    <span class="onoffswitch-switch"></span>
+          //  </label>
+          //</div>
+          //`;
+          //$('#msg').text(response.message);
+          //$('#msg').show();
+          //$("#msg").fadeOut(3000)
+          //$(".onoffswitch").append(html);
+          location.reload()
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          $('#msg').text(errorThrown);
+          $('#msg').show();
+          $("#msg").fadeOut(3000)
+        }
+      });
+    });
+  });
+</script>
+
+{% endblock content %}

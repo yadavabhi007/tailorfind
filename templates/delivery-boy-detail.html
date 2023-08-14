@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<style>
+  div#DataTables_Table_1_info {
+    margin-left: 10px;
+}
+</style>
+<div class="page-wrapper" style="min-height: 250px;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="application-detail-heading-area">
+          <h2 class="noti_detail">Delivery Boy Detail</h2>
+        </div>
+        <div class="admin-detail-main-area">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="admin-detail-list-area">
+                <div class="admin-name-img-area">
+                  <div class="admin-name-area">
+                    <h4>{{delivery_boy.phone}}</h4>
+                  </div>
+                </div>
+                <div class="admin-contact-detail-area">
+                  <h4>Name: <span>{{delivery_boy.first_name|default:''}} {{delivery_boy.last_name|default:''}}</span></h4>
+                  <h4>Total Picked For Delivery Orders: <span>{{total_picked_for_delivery_orders}}</span></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="admin-contact-detail-area">
+                <h4>Total Amount: <span>{{total_earning}}</span></h4>
+                <h4>Balance Amount: <span>{{remain_price}}</span></h4>
+                <h4>Withdraw Amount: <span>{{total_withdrow_amount}}</span></h4>
+                <h4>Pending Amount: <span>{{total_pending_amount}}</span></h4>
+                <h4>Paid Amount: <span>{{total_paid_amount}}</span></h4>
+                <h4>Date: <span>{{delivery_boy.created_at}}</span></h4>
+                <h4>Location: <span>{{delivery_boy.location|default:''}}</span></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="admin-appuser-application-marchent tabCustomerDetails">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link tab-btn active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                type="button" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-user-plus"
+                  aria-hidden="true"></i>Picked For Delivery Orders</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link tab-btn" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                type="button" role="tab" aria-controls="profile" aria-selected="false"><i class="fa fa-mobile"
+                  aria-hidden="true"></i>Delivered Orders</button>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="app-user-main-heading-area">
+              <h2 class="noti_detail">Picked For Delivery Orders</h2>
+            </div>
+            <div class="admin-appuser-table-area">
+              <table class="table example1">
+                <thead>
+                  <tr>
+                    <th>Sr No</th>
+                    <th>Order ID</th>
+                    <th>Tailor</th>
+                    <th>Customer</th>
+                    <th>Delivery Address</th>
+                    <th>Order Date</th>
+                    <th>Completed Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if picked_for_delivery_orders %}
+                  {% for picked_for_delivery_order in picked_for_delivery_orders %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'order-detail' picked_for_delivery_order.id %}">{{picked_for_delivery_order.id}}</a></td>
+                    <td><a href="{% url 'tailor-detail' picked_for_delivery_order.tailor.id %}">{% firstof picked_for_delivery_order.tailor.first_name picked_for_delivery_order.tailor.last_name picked_for_delivery_order.tailor %}</a></td>
+                    <td><a href="{% url 'customer-detail' picked_for_delivery_order.customer.id %}">{% firstof picked_for_delivery_order.customer.first_name picked_for_delivery_order.customer.last_name picked_for_delivery_order.customer %}</a></td>
+                    <td>{{picked_for_delivery_order.customer_delivery_address|default:''}}</td>
+                    <td>{{picked_for_delivery_order.order_date|default:''}}</td>
+                    <td>{{picked_for_delivery_order.completed_date|default:''}}</td>
+                    <td><a href="{% url 'update-order-status' picked_for_delivery_order.id %}">{{picked_for_delivery_order.status}}</a></td>
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="app-user-main-heading-area">
+              <h2>Delivered Orders</h2>
+            </div>
+            <div class="admin-appuser-table-area">
+              <table class="table example1">
+                <thead>
+                  <tr>
+                    <th>Sr No</th>
+                    <th>Order ID</th>
+                    <th>Tailor</th>
+                    <th>Customer</th>
+                    <th>Delivery Address</th>
+                    <th>Order Date</th>
+                    <th>Delivery Date</th>
+                    <th>Order Type</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if delivered_orders %}
+                  {% for delivered_order in delivered_orders %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{delivered_order.order_id.id}}</td>
+                    <td>{{delivered_order.order_id.tailor}}</td>
+                    <td>{{delivered_order.order_id.customer}}</td>
+                    {% if delivered_order.status == 'PickCompleted' %}
+                    <td>{{delivered_order.order_id.customer_delivery_address}}</td>
+                    {% else %}
+                    <td>{{delivered_order.order_id.tailor.location|default:''}}</td>
+                    {% endif %}
+                    <td>{{delivered_order.order_id.order_date|default:''}}</td>
+                    {% if delivered_order.status == 'PickCompleted' %}
+                    <td>{{delivered_order.order_id.pickup_date|default:''}}</td>
+                    {% else %}
+                    <td>{{delivered_order.order_id.delivery_date|default:''}}</td>
+                    {% endif %}
+                    {% if delivered_order.status == 'PickCompleted' %}
+                    <td>Pickup Order</td>
+                    {% else %}
+                    <td>Deliver Order</td>
+                    {% endif %}
+                    <td>Completed</td>
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

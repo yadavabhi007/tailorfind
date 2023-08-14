@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="page-wrapper wrapper_page" style="min-height: 250px;">
+  <div class="container-fluid white_bg">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="application-detail-heading-area">
+          <h2 class="noti_detail">My Affiliate </h2>
+        </div>
+        <div class="table-data-search-box">
+          <div class="search">
+            <input type="text" class="searchTerm" placeholder="Search">
+            <button type="submit" class="searchButton">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <div class="manage-admins-main-area">
+          <div class="manage-admins-table-area">
+            <table class="table cenetr">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Date</th>
+                  <th>Affiliate title</th>
+                  <th>Price</th>
+                  <th>Commission</th>
+                  <th> Product Image</th>
+                  <th>Action</th>
+                  <th>Active/Inactive</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>
+                    <div class="user-icon-detail-area">
+                      <div class="company-user-icon-area">
+                        <img src="images/demo-logo.png" alt="company logo">
+                      </div>
+                      <div class="user-name-area">
+                        <h5><a href="#">Admin - 1</a></h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Mar 18, 2021</td>
+                  <td>Title</td>
+                  <td>100</td>
+                  <td style="text-align:center;">91</td>
+                  <td>
+                    <div class="images">
+                      <img src="./images/alejandro-luengo--c1-ZT-hLzM-unsplash.jpg" alt="unsplash" width="100px"
+                        height="100px">
+                    </div>
+                  </td>
+                  <td>
+                    <a href="#" class="mange-admins-edit-btn"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                  </td>
+                  <td>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-1"
+                        checked>
+                      <label class="onoffswitch-label" for="myonoffswitch-1">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>
+                    <div class="user-icon-detail-area">
+                      <div class="company-user-icon-area">
+                        <img src="images/demo-logo.png" alt="company logo">
+                      </div>
+                      <div class="user-name-area">
+                        <h5><a href="#">Admin - 2</a></h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Mar 18, 2021</td>
+                  <td>Title</td>
+                  <td>150</td>
+                  <td style="text-align:center;">55</td>
+                  <td>
+                    <div class="images">
+                      <img src="./images/alexandra-tran-_ieSbbgr3_I-unsplash.jpg" alt="unsplash" width="100px"
+                        height="100px">
+                    </div>
+                  </td>
+                  <td>
+                    <a href="#" class="mange-admins-edit-btn"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                  </td>
+                  <td>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-2"
+                        checked>
+                      <label class="onoffswitch-label" for="myonoffswitch-2">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>
+                    <div class="user-icon-detail-area">
+                      <div class="company-user-icon-area">
+                        <img src="images/demo-logo.png" alt="company logo">
+                      </div>
+                      <div class="user-name-area">
+                        <h5><a href="#">Admin - 3</a></h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Mar 18, 2021</td>
+                  <td>Title</td>
+                  <td>270</td>
+                  <td style="text-align:center;">100</td>
+                  <td>
+                    <div class="images">
+                      <img src="./images/pat-taylor-12V36G17IbQ-unsplash.jpg" alt="unsplash" width="100px"
+                        height="100px">
+                    </div>
+                  </td>
+                  <td>
+                    <a href="#" class="mange-admins-edit-btn"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                  </td>
+                  <td>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-3"
+                        checked>
+                      <label class="onoffswitch-label" for="myonoffswitch-3">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>
+                    <div class="user-icon-detail-area">
+                      <div class="company-user-icon-area">
+                        <img src="images/demo-logo.png" alt="company logo">
+                      </div>
+                      <div class="user-name-area">
+                        <h5><a href="#">Admin - 4</a></h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Mar 18, 2021</td>
+                  <td>Title</td>
+                  <td>200</td>
+                  <td style="text-align:center;">20</td>
+                  <td>
+                    <div class="images">
+                      <img src="./images/nordwood-themes-Nv4QHkTVEaI-unsplash.jpg" alt="unsplash" width="100px"
+                        height="100px">
+                    </div>
+                  </td>
+                  <td>
+                    <a href="#" class="mange-admins-edit-btn"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                  </td>
+                  <td>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-4"
+                        checked>
+                      <label class="onoffswitch-label" for="myonoffswitch-4">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>
+                    <div class="user-icon-detail-area">
+                      <div class="company-user-icon-area">
+                        <img src="images/demo-logo.png" alt="company logo">
+                      </div>
+                      <div class="user-name-area">
+                        <h5><a href="#">Admin - 5</a></h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Mar 18, 2021</td>
+                  <td>Title</td>
+                  <td>140</td>
+                  <td style="text-align:center;">25</td>
+                  <td>
+                    <div class="images">
+                      <img src="./images/marissa-grootes-D4jRahaUaIc-unsplash.jpg" alt="unsplash" width="100px"
+                        height="100px">
+                    </div>
+                  </td>
+                  <td>
+                    <a href="#" class="mange-admins-edit-btn"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                  </td>
+                  <td>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-5"
+                        checked>
+                      <label class="onoffswitch-label" for="myonoffswitch-5">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>
+                    <div class="user-icon-detail-area">
+                      <div class="company-user-icon-area">
+                        <img src="images/demo-logo.png" alt="company logo">
+                      </div>
+                      <div class="user-name-area">
+                        <h5><a href="#">Admin - 6</a></h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Mar 18, 2021</td>
+                  <td>Title</td>
+                  <td>106</td>
+                  <td style="text-align:center;">30</td>
+                  <td>
+                    <div class="images">
+                      <img src="./images/charisse-kenion-dah-jZWgzx8-unsplash.jpg" alt="unsplash" width="100px"
+                        height="100px">
+                    </div>
+                  </td>
+                  <td>
+                    <a href="#" class="mange-admins-edit-btn"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                  </td>
+                  <td>
+                    <div class="onoffswitch">
+                      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-6"
+                        checked>
+                      <label class="onoffswitch-label" for="myonoffswitch-6">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

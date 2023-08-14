@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="page-wrapper wrapper_page">
+    <div class="page-breadcrumb bg-white white_bg">
+        <div class="row align-items-center">
+            <div class="col-lg-9 col-md-4 col-sm-4 col-xs-12 mb-3">
+                <h4 class="page-title title_page">Create Enquiry</h4>
+            </div>
+        </div>
+        <div class="dashboardBox">
+            <div class="container-fluid">
+                <div class="profile-input-box-area">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags %}
+                    <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    <form class="contact-form-main-area" action="" method="post" id="paymentFrm">
+                        {% csrf_token %}
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="first_name"
+                                    placeholder="Enter First Name" autofocus="" id="first_name" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="last_name"
+                                    placeholder="Enter Last Name" autofocus="" id="last_name">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text" pattern="\+[0-9]{8,14}" title="Phone Number With Country Code" maxlength="16" class="form-control field change_border" name="phone"
+                                    placeholder="Enter Phone With Country Code" autofocus="" id="phone"  required="">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input type="text" maxlength="100" class="form-control field change_border" name="subject"
+                                    placeholder="Enter Subject" autofocus="" id="subject"  required="">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea name="message" id="message" cols="30" rows="10" class="form-control field change_border" placeholder="Enter Message" autofocus="" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="contact-form-submint-btn-area">
+                                <button type="submit" class="contact-form-submint-btn btn_submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

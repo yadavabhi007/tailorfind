@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="page-wrapper wrapper_page">
+    <div class="page-breadcrumb bg-white white_bg">
+        <div class="row align-items-center">
+            <div class="col-lg-9 col-md-4 col-sm-4 col-xs-12 mb-3">
+                <h4 class="page-title title_page">Update Privacy Policy</h4>
+            </div>
+        </div>
+        <div class="dashboardBox">
+            <div class="container-fluid">
+                <div class="profile-input-box-area">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags %}
+                    <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    <form class="contact-form-main-area" action="" method="post" enctype="multipart/form-data" id="paymentFrm">
+                        {% csrf_token %}
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                {% if privacy_policy.img %}
+                                <img src="{{privacy_policy.img.url}}" alt="Image Here" style="height: 1.7in; width: 5cm;" class="rounded-circle ml-4 mb-2">
+                                {% endif %}
+                                <input type="file" class="form-control field change_border " alt="img" name="img" autofocus="" id="choose_profilepic">
+                                
+                            </div>
+                            <div class="form-group">
+                                <label>Privacy Policy:</label>
+                                <textarea class="form-control change_border " placeholder="Enter Term and Condition" required id="editor"
+                                name="description" rows="11" style="height: auto;">{{privacy_policy.description}}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="contact-form-submint-btn-area">
+                                <button type="submit" class="contact-form-submint-btn btn_submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

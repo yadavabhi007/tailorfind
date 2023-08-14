@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="page-wrapper wrapper_page">
+    <div class="page-breadcrumb bg-white white_bg">
+        <div class="container-fluid">
+
+        <div class="row align-items-center">
+            <div class="col-lg-9 col-md-4 col-sm-4 col-xs-12 mb-3">
+                <h4 class="page-title title_page">Update Tailor</h4>
+            </div>
+        </div>
+        </div>
+        <div class="dashboardBox">
+            <div class="container-fluid">
+                <div class="profile-input-box-area">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags %}
+                    <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    <span type="text" id="message" class="info" contenteditable="false"></span>
+                    <form class="contact-form-main-area" action="" method="post" id="paymentFrm">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="first_name"
+                                    placeholder="Enter First Name" autofocus="" id="first_name" value="{{tailor.first_name|default:''}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="last_name"
+                                    placeholder="Enter Last Name" autofocus="" id="last_name" value="{{tailor.last_name|default:''}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="phone"
+                                    placeholder="Enter Phone With Country Code" autofocus="" id="phone" value="{{tailor.phone|default:''}}"  required="">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Location</label>
+                                <input type="text" class="form-control field change_border" name="location" value="{{tailor.location|default:''}}"
+                                    placeholder="Enter Location" autofocus="" id="location">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="contact-form-submint-btn-area">
+                                <button type="submit" class="contact-form-submint-btn btn_submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    const form = document.getElementById('paymentFrm');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'update-tailor' tailor.id %}",
+            data: {
+                phone: $('#phone').val(),
+                location: $('#location').val(),
+                firstName: $('#first_name').val(),
+                lastName: $('#last_name').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                dataType: "json",
+
+            },
+            success: function (data) {
+                location.reload();
+            },
+            failure: function () {
+            }
+        });
+    });
+
+
+</script>
+{% endblock content %}

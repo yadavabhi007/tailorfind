@@ -1,0 +1,17 @@
+#files
+*.env 
+.env* 
+*.local
+
+
+#folders
+migrations/
+media/
+__pycache__/
+venv/
+env/
+
+
+#databases
+local_settings.py
+db.sqlite3

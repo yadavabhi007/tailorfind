@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="page-wrapper wrapper_page">
+    <div class="page-breadcrumb bg-white white_bg">
+        <div class="row align-items-center">
+            <div class="col-lg-9 col-md-4 col-sm-4 col-xs-12 mb-3">
+                <h4 class="page-title title_page">Update Order</h4>
+            </div>
+        </div>
+        <div class="dashboardBox">
+            <div class="container-fluid">
+                <div class="profile-input-box-area">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags %}
+                    <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    <form class="contact-form-main-area" action="" method="post" id="paymentFrm">
+                        {% csrf_token %}
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Customer</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="customer" name="customer"
+                                        required="" disabled>
+                                        {% for customer in customers %}
+                                        <option value="{{customer.id}}" {% if customer.id == selected_customer.id %}selected{%endif %}>
+                                            {{customer}}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Tailor</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="tailor" name="tailor" required="" disabled>
+                                        {% for tailor in tailors %}
+                                        <option value="{{tailor.id}}" {% if tailor.id == selected_tailor.id %}selected{% endif%}>
+                                            {{tailor}}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Delivery Boy</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="delivery_boy" name="delivery_boy">
+                                        {% if order.delivery_boy is None %}
+                                        <option value="">Select Delivery Boy</option>
+                                        {% for delivery_boy in delivery_boys %}
+                                        <option value="{{delivery_boy.id}}">
+                                            {{delivery_boy}}
+                                        </option>
+                                        {% endfor %}
+                                        {% else %}
+                                        {% for delivery_boy in delivery_boys %}
+                                        <option value="{{delivery_boy.id}}" {% if delivery_boy.id == selected_delivery_boy.id %}selected{% endif %}>
+                                            {{delivery_boy}}
+                                        </option>
+                                        {% endfor %}
+                                        <option value="">Select Delivery Boy</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Service</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <p>{% for service in order.service.all %}<ul><li><span>{{service.service.name}} | {{service.service.type}} | ${{service.service.price}} | {{service.service.category}} - Quantity ({{service.quantity}})</li></ul></span>{% endfor %}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Customer Delivery Address</label>
+                                <textarea name="delivery_address" id="delivery_address" cols="30" rows="10" class="form-control field change_border" placeholder="Customer Delivery Address" autofocus="" disabled required>{{order.customer_delivery_address}}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Order Date</label>
+                                <input type="date" class="form-control field change_border" name="order_date"
+                                    placeholder="Enter Order Date" autofocus="" id="order_date" value="{{order.order_date|date:'Y-m-d'}}" disabled required>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Pickup Date</label>
+                                <input type="date" class="form-control field change_border" name="pickup_date"
+                                    placeholder="Enter Pickup Date" autofocus="" id="pickup_date" value="{{order.pickup_date|date:'Y-m-d'}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Completed Date</label>
+                                <input type="date" class="form-control field change_border" name="completed_date"
+                                    placeholder="Enter Completed Date" autofocus="" id="completed_date" value="{{order.completed_date|date:'Y-m-d'}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Delivery Date</label>
+                                <input type="date" class="form-control field change_border" name="delivery_date"
+                                    placeholder="Enter Delivery Date" autofocus="" id="delivery_date" value="{{order.delivery_date|date:'Y-m-d'}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Status</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="status" name="status" required>
+                                        {% for choice in model.CHOICES %}
+                                        {% if order.status == choice.0 %}
+                                        <option value="{{ choice.0 }}" selected>{{ choice.1 }}</option>
+                                        {% else %}
+                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Canceled Date</label>
+                                <input type="date" class="form-control field change_border" name="canceled_date"
+                                    placeholder="Enter Canceled Date" autofocus="" id="canceled_date" value="{{order.canceled_date|date:'Y-m-d'}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Cancel Reason</label>
+                                <textarea name="cancel_reason" id="cancel_reason" cols="30" rows="10" class="form-control field change_border" placeholder="Enter Cancel Reason" autofocus="">{{order.cancel_reason|default:''}}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="contact-form-submint-btn-area">
+                                <button type="submit" class="contact-form-submint-btn btn_submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.select2').select2();
+</script>
+{% endblock content %}

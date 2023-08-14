@@ -1,0 +1,123 @@
+<aside class="left-sidebar left_aside" data-sidebarbg="skin6">
+    <div class="scroll-sidebar">
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav" class="nav_bar_side">
+                <li class="sidebar-item pt-2">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'dashboard' %}"
+                        aria-expanded="false">
+                        <i class="fas fa-tachometer-alt leftside_icon"></i>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'manage-customers' %}"
+                        aria-expanded="false">
+                        <i class="fas fa-user-plus leftside_icon"></i>
+                        <span class="hide-menu">Manage Customers</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'manage-tailors' %}"
+                        aria-expanded="false">
+                        <i class="fas fa-user-plus leftside_icon"></i>
+                        <span class="hide-menu">Manage Tailors</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'manage-delivery-boys' %}"
+                        aria-expanded="false">
+                        <i class="fas fa-user-plus leftside_icon"></i>
+                        <span class="hide-menu">Manage Delivery Boys</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'orders' %}"
+                        aria-expanded="false">
+                        <i class="fab fa-first-order leftside_icon"></i>
+                        <span class="hide-menu">Manage Orders</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'services' %}" aria-expanded="false"><i class="fas fa-cog leftside_icon"></i><span class="hide-menu">Services</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'earnings' %}"
+                        aria-expanded="false">
+                        <i class="fas fa-address-card leftside_icon"></i>
+                        <span class="hide-menu">Earnings</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'delievryboypriceview' %}"
+                        aria-expanded="false">
+                        <i class="fas fa-address-card leftside_icon"></i>
+                        <span class="hide-menu">Delievry Boy Earnings</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'enquiries' %}"
+                        aria-expanded="false">
+                        <i class="fas fa-address-card leftside_icon"></i>
+                        <span class="hide-menu">Enquiries</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'notifications' %}"
+                        aria-expanded="false">
+                        <i class="fas fa-bell leftside_icon"></i>
+                        <span class="hide-menu">Notifications</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'setting' %}"
+                        aria-expanded="false">
+                        <i class="fas fa-cog leftside_icon"></i>
+                        <span class="hide-menu">Settings</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'terms-and-conditions' %}"
+                        aria-expanded="false">
+                        <i class="fas fa-certificate leftside_icon" aria-hidden="true"></i>
+                        <span class="hide-menu">Terms & Conditions</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'privacy-policies' %}"
+                        aria-expanded="false">
+                        <i class="fas fa-file-alt leftside_icon"></i>
+                        <span class="hide-menu">Privacy & Policy</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link link_sidebar" href="{% url 'logout' %}"
+                        aria-expanded="false" data-bs-toggle="modal" data-bs-target="#exampleLogout">
+                        <i class="fas fa-power-off leftside_icon"></i>
+                        <span class="hide-menu">Log Out</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+<div class="modal fade" id="exampleLogout" tabindex="-1" aria-labelledby="exampleLogoutLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content innerDiv-model-dialog">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleLogoutLabel">Logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <hr class="p-0 m-0">
+            <div class="modal-body my-4">
+                Are You Sure, Really Want To Log Out ?
+            </div>
+            <hr class="p-0 m-0">
+            <div class="modal-footer">
+                <button type="button" class="download-invoice-btn" data-bs-dismiss="modal">Close</button>
+                <a href="{% url 'logout' %}"><button type="button" class="download-invoice-btn">Logout</button></a>
+            </div>
+        </div>
+    </div>
+</div>

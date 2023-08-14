@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="page-wrapper wrapper_page">
+    <div class="page-breadcrumb bg-white white_bg">
+        <div class="row align-items-center">
+            <div class="col-lg-9 col-md-4 col-sm-4 col-xs-12 mb-3">
+                <h4 class="page-title title_page">Update Earning</h4>
+            </div>
+        </div>
+        <div class="dashboardBox">
+            <div class="container-fluid">
+                <div class="profile-input-box-area">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags %}
+                    <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    <form class="contact-form-main-area" action="" method="post" enctype="multipart/form-data" id="paymentFrm">
+                        {% csrf_token %}
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Tailor ID</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="tailor"
+                                    placeholder="Tailor" autofocus="" id="tailor" disabled value="{{earning.order.id}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Tailor First Name</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="tailor"
+                                    placeholder="Tailor" autofocus="" id="tailor" disabled value="{{earning.order.first_name}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Tailor Last Name</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="tailor"
+                                    placeholder="Tailor" autofocus="" id="tailor" disabled value="{{earning.order.last_name}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Requested Amount</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="amount"
+                                    placeholder="Amount" autofocus="" id="amount" disabled value="{{earning.requested_amount}}" >
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Payment Proof:</label><br>
+                                {% if earning.image %}
+                                <a href="/media/{{earning.image}}/"><img src="{{earning.image.url}}" height="150" width="200" alt="Image"></a><br><br>
+                                <label>Clear Image:</label>
+                                <input type="checkbox" name="clear_image" id="clear_image">
+                                {% endif %}
+                                <input type="file" class="form-control field change_border" name="image"
+                                    placeholder="Upload Image" autofocus="" value="{{earning.image}}" id="image">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Status</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="status" name="status" required>
+                                        {% for choice in model.CHOICES %}
+                                        {% if earning.status == choice.0 %}
+                                        <option value="{{ choice.0 }}" selected>{{ choice.1 }}</option>
+                                        {% else %}
+                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Requested Date</label>
+                                <input type="text" class="form-control field change_border" name="request_date"
+                                    placeholder="Enter Paid Date" autofocus="" id="paid_date" value="{{earning.request_date}}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="contact-form-submint-btn-area">
+                                <button type="submit" class="contact-form-submint-btn btn_submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const orderID = () => {
+        const order = document.getElementById("order").value;
+        console.log(order);
+        $.ajax({
+          method: "GET",
+          url: "{% url 'select-order' %}",
+          data: {
+            order_id: order,
+          },
+          success: function (data) {
+            document.getElementById("tailor").value = data.tailor;
+            console.log(data.tailor)
+            document.getElementById("total_service").value = data.total_service;
+            document.getElementById("amount").value = data.amount;
+          },
+        });
+      };
+</script>
+{% endblock content %}

@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="page-wrapper" style="min-height: 250px;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="application-detail-heading-area ">
+          <h2 class="noti_detail">Tailor Detail</h2>
+        </div>
+        <div class="admin-detail-main-area">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="admin-detail-list-area">
+                <div class="admin-name-img-area">
+                  <div class="admin-name-area">
+                    <h4>{{tailor.phone}}</h4>
+                  </div>
+                </div>
+                <div class="admin-contact-detail-area">
+                  <h4>Name: <span>{{tailor.first_name|default:''}} {{tailor.last_name|default:''}}</span></h4>
+                  <h4>Location: <span>{{tailor.location|default:''}}</span></h4>
+                  <h4>Date: <span>{{tailor.created_at}}</span></h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="admin-contact-detail-area">
+                <h4>Total Pending Orders: <span>{{total_pending_orders}}</span></h4>
+                <h4>Total Amount: <span>{{total_completed_amount}}</span></h4>
+                <h4>Balance Amount: <span>{{remain_price}}</span></h4>
+                <h4>Total Requested Amount: <span>{{total_withdraw_amount}}</span></h4>
+                <h4>Total Paid Amount: <span>{{total_paid_amount}}</span></h4>
+                <h4>Total Pending Amount: <span>{{pending_amount}}</span></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="admin-appuser-application-marchent tabCustomerDetails">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link tab-btn active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                type="button" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-user-plus"
+                  aria-hidden="true"></i>Pending Orders</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link tab-btn" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                type="button" role="tab" aria-controls="profile" aria-selected="false"><i class="fa fa-mobile"
+                  aria-hidden="true"></i>Completed Orders</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link tab-btn" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa fa-users"
+                  aria-hidden="true"></i>Accepted Orders</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link tab-btn" id="earnings-tab" data-bs-toggle="tab" data-bs-target="#earnings"
+                type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa fa-users"
+                  aria-hidden="true"></i>Earnings</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link tab-btn" id="withdraw-tab" data-bs-toggle="tab" data-bs-target="#withdraw"
+                type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa fa-users"
+                  aria-hidden="true"></i>Withdraw Requests</button>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="app-user-main-heading-area">
+              <h2 class="noti_detail">Pending Orders</h2>
+            </div>
+            <div class="admin-appuser-table-area">
+              <table class="table example1">
+                <thead>
+                  <tr>
+                    <th>Sr No</th>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Delivery Boy</th>
+                    <th>Number of Services</th>
+                    <th>Total Price</th>
+                    <th>Order Date</th>
+                    <th>Delivery Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if pending_orders %}
+                  {% for pending_order in pending_orders %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'order-detail' pending_order.id %}">{{pending_order.id}}</a></td>
+                    <td><a href="{% url 'customer-detail' pending_order.customer.id %}">{% firstof pending_order.customer.first_name pending_order.customer.last_name pending_order.customer %}</a></td>
+                    <td>{% if pending_order.delivery_boy %}<a href="{% url 'delivery-boy-detail' pending_order.delivery_boy.id %}">{% firstof pending_order.delivery_boy.first_name pending_order.delivery_boy.last_name pending_order.delivery_boy %}{% endif %}</a></td>
+                    <td>{{pending_order.pending_order_quantity}}</td>
+                    <td>{{pending_order.pending_order_price}}</td>
+                    <td>{{pending_order.order_date|default:''}}</td>
+                    <td>{{pending_order.delivery_date|default:''}}</td>
+                    <td><a href="{% url 'update-order-status' pending_order.id %}">{{pending_order.status}}</a></td>
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="app-user-main-heading-area">
+              <h2>Completed Orders</h2>
+            </div>
+            <div class="admin-appuser-table-area">
+              <table class="table example1">
+                <thead>
+                  <tr>
+                    <th>Sr No</th>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Delivery Boy</th>
+                    <th>Number of Services</th>
+                    <th>Total Price</th>
+                    <th>Order Date</th>
+                    <th>Completed Date</th>
+                    <th>Delivery Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if completed_orders %}
+                  {% for completed_order in completed_orders %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'order-detail' completed_order.id %}">{{completed_order.id}}</a></td>
+                    <td><a href="{% url 'customer-detail' completed_order.customer.id %}">{% firstof completed_order.customer.first_name completed_order.customer.last_name completed_order.customer %}</a></td>
+                    <td>{% if completed_order.delivery_boy %}<a href="{% url 'delivery-boy-detail' completed_order.delivery_boy.id %}">{% firstof completed_order.delivery_boy.first_name completed_order.delivery_boy.last_name completed_order.delivery_boy %}{% endif %}</a></td>
+                    <td>{{completed_order.completed_order_quantity}}</td>
+                    <td>{{completed_order.completed_order_price}}</td>
+                    <td>{{completed_order.order_date|default:''}}</td>
+                    <td>{{completed_order.completed_date|default:''}}</td>
+                    <td>{{completed_order.delivery_date|default:''}}</td>
+                    <td><a href="{% url 'update-order-status' completed_order.id %}">{{completed_order.status}}</a></td>
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="app-user-main-heading-area">
+              <h2>Accepted Orders</h2>
+            </div>
+            <div class="admin-appuser-table-area">
+              <table class="table example1">
+                <thead>
+                  <tr>
+                    <tr>
+                      <th>Sr No</th>
+                      <th>Order ID</th>
+                      <th>Customer</th>
+                      <th>Delivery Boy</th>
+                      <th>Number of Services</th>
+                      <th>Total Price</th>
+                      <th>Order Date</th>
+                      <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% if accepted_orders %}
+                  {% for accepted_order in accepted_orders %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'order-detail' accepted_order.id %}">{{accepted_order.id}}</a></td>
+                    <td><a href="{% url 'customer-detail' accepted_order.customer.id %}">{% firstof accepted_order.customer.first_name accepted_order.customer.last_name accepted_order.customer %}</a></td>
+                    <td>{% if accepted_order.delivery_boy %}<a href="{% url 'delivery-boy-detail' accepted_order.delivery_boy.id %}">{% firstof accepted_order.delivery_boy.first_name accepted_order.delivery_boy.last_name accepted_order.delivery_boy %}{% endif %}</a></td>
+                    <td>{{accepted_order.accepted_order_quantity}}</td>
+                    <td>{{accepted_order.accepted_order_price}}</td>
+                    <td>{{accepted_order.order_date}}</td>                    
+                    <td><a href="{% url 'update-order-status' accepted_order.id %}">{{accepted_order.status}}</a></td>
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="earnings" role="tabpanel" aria-labelledby="earnings-tab">
+            <div class="app-user-main-heading-area">
+              <h2>Earnings</h2>
+            </div>
+            <div class="admin-appuser-table-area">
+              <table class="table example1">
+                <thead>
+                  <tr>
+                    <th>Sr No</th>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Number of Services</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Completed Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if earnings %}
+                  {% for earning in earnings %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="{% url 'order-detail' earning.id %}">{{earning.id}}</a></td>
+                    <td><a href="{% url 'customer-detail' earning.customer.id %}">{{earning.customer.id}}</a></td>
+                    <td>{{earning.earning_quantity}}</td>
+                    <td>{{earning.earning_price.price__sum}}</td>                    
+                    <td>{{earning.status}}</td>                    
+                    <td>{{earning.completed_date|default:''}}</td>
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="withdraw" role="tabpanel" aria-labelledby="withdraw-tab">
+            <div class="app-user-main-heading-area">
+              <h2>Withdraw Requests</h2>
+            </div>
+            <div class="admin-appuser-table-area">
+              <table class="table example1">
+                <thead>
+                  <tr>
+                    <th>Sr No</th>
+                    <th>Amount</th>
+                    <th>Request Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if withdraws %}
+                  {% for withdraw in withdraws %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{withdraw.requested_amount}}</td>                    
+                    <td>{{withdraw.request_date|default:''}}</td>
+                    <td>{{withdraw.status}}</td>
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

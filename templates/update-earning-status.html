@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="page-wrapper wrapper_page">
+    <div class="page-breadcrumb bg-white white_bg">
+        <div class="row align-items-center">
+            <div class="col-lg-9 col-md-4 col-sm-4 col-xs-12 mb-3">
+                <h4 class="page-title title_page">Update Earning Status</h4>
+            </div>
+        </div>
+        <div class="dashboardBox">
+            <div class="container-fluid">
+                <div class="profile-input-box-area">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags %}
+                    <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    <form class="contact-form-main-area" action="" method="post" enctype="multipart/form-data" id="paymentFrm">
+                        {% csrf_token %}
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Tailor:</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="tailor"
+                                    placeholder="Enter Tailor" autofocus="" id="tailor" value="{{earning.order.tailor}}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Total Service:</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="total_service"
+                                    placeholder="Enter Total Service" autofocus="" id="total_service" value="{{total_service}}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Amount:</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="amount"
+                                    placeholder="Enter Amount" autofocus="" id="amount" value="{{earning_price}}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Request Date:</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="request_date"
+                                    placeholder="Enter Request Date" autofocus="" id="request_date" value="{{earning.created_at}}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Payment Proof:</label><br>
+                                {% if earning.image %}
+                                <a href="/media/{{earning.image}}/"><img src="{{earning.image.url}}" height="150" width="200" alt="Image"></a><br><br>
+                                <label>Clear Image:</label>
+                                <input type="checkbox" name="clear_image" id="clear_image">
+                                {% endif %}
+                                <input type="file" class="form-control field change_border" name="image"
+                                    placeholder="Upload Image" autofocus="" value="{{earning.image}}" id="image">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Status:</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="status" name="status" required>
+                                        {% for choice in model.CHOICES %}
+                                        {% if earning.status == choice.0 %}
+                                        <option value="{{ choice.0 }}" selected>{{ choice.1 }}</option>
+                                        {% else %}
+                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Paid Date</label>
+                                <input type="date" class="form-control field change_border" name="paid_date"
+                                    placeholder="Enter Paid Date" autofocus="" id="paid_date" value="{{earning.paid_date|date:'Y-m-d'}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Request Date</label>
+                                <input type="date" class="form-control field change_border" name="request_date"
+                                    placeholder="Enter Request Date" autofocus="" id="request_date" value="{{earning.request_date|date:'Y-m-d'}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="contact-form-submint-btn-area">
+                                <button type="submit" class="contact-form-submint-btn btn_submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

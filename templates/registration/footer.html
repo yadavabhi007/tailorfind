@@ -1,0 +1,39 @@
+{% load static %}
+</div>
+<footer class="footer text-center footer_text"> 2022 © All rights reserved. <a class="footer_link"
+        href="#">Tyre Power</a>
+</footer>
+
+<script src="{% static 'tyrepower_app/plugins/bower_components/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'tyrepower_app/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'tyrepower_app/js/app-style-switcher.js' %}"></script>
+<script src="{% static 'tyrepower_app/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js' %}"></script>
+<script src="{% static 'tyrepower_app/js/waves.js' %}"></script>
+<script src="{% static 'tyrepower_app/js/sidebarmenu.js' %}"></script>
+<script src="{% static 'tyrepower_app/js/custom.js' %}"></script>
+<script src="{% static 'tyrepower_app/plugins/bower_components/chartist/dist/chartist.min.js' %}"></script>
+<script
+    src="{% static 'tyrepower_app/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' %}"></script>
+<script src="{% static 'tyrepower_app/js/pages/dashboards/dashboard1.js' %}"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+<script src="{% static 'tyrepower_app/js/chart.js' %}"></script>
+<script src="{% static 'tyrepower_app/js/pie-chart.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('.counter-value').each(function () {
+            $(this).prop('Counter', 0).animate({
+                Counter: $(this).text()
+            }, {
+                duration: 3500,
+                easing: 'swing',
+                step: function (now) {
+                    $(this).text(Math.ceil(now));
+                }
+            });
+        });
+    });
+</script>
+</body>
+
+</html>

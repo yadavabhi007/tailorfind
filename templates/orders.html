@@ -1,0 +1,503 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="page-wrapper wrapper_page" style="min-height: 250px;">
+  <div class="container-fluid white_bg">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="application-detail-heading-area">
+          <h2 class="noti_detail">Orders List</h2>
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags %}
+        <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <div class="manage-admins-main-area">
+          <div class="manage-admins-table-area">
+            <table class="table" id="example1">
+              <thead>
+                <tr>
+                  <th>Sr No</th>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Tailor</th>
+                  <th>Delivery Boy</th>
+                  <th>Status</th>
+                  <th>View Details</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if orders %}
+                {% for order in orders %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{order.id}}</td>
+                  <td>
+                    <a data-bs-toggle="modal" data-bs-target="#exampleCustomer{{order.customer.id}}">
+                      {{order.customer}}
+                    </a>
+                  </td>
+                  <td>
+                    <a data-bs-toggle="modal" data-bs-target="#exampleTailor{{order.tailor.id}}">
+                      {{order.tailor}}
+                    </a>
+                  </td>
+                  <td>
+                    <a data-bs-toggle="modal" data-bs-target="#exampleDeliveryBoy{{order.delivery_boy.id}}">
+                      {{order.delivery_boy}}
+                    </a>
+                  </td>
+                  <td>{{order.status}}</td>
+                  <td ><a href="{% url 'order-detail' order.id %}"
+                    class="mange-admins-edit-btn"><i class="fas fa-eye"></i></a></td>
+                  <td>
+                    <a href="{% url 'update-order' order.id %}" class="mange-admins-edit-btn"><i
+                        class="fas fa-edit"></i></a>
+                    <a data-bs-toggle="modal" data-bs-target="#ModalOrder{{order.id}}"
+                      class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                  </td>
+                </tr>
+                <div class="modal fade" id="ModalOrder{{order.id}}" tabindex="-1"
+                  aria-labelledby="ModalLabelOrder{{order.id}}" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content innerDiv-model-dialog">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabelOrder{{order.id}}">Delete
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <hr class="p-0 m-0">
+                      <div class="modal-body my-4">
+                        Are You Sure, Really Want To Delete ?
+                      </div>
+                      <hr class="p-0 m-0">
+                      <div class="modal-footer">
+                        <button type="button" class="download-invoice-btn" data-bs-dismiss="modal">Close</button>
+                        <a href="{% url 'delete-order' order.id %}"><button type="button"
+                            class="download-invoice-btn">Delete</button></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal fade" id="exampleCustomer{{order.customer.id}}" tabindex="-1" aria-labelledby="exampleCustomerLabel{{order.customer.id}}" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleCustomerLabel{{order.customer.id}}">Customer Detail</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <h4>First Name: <span>{{order.customer.first_name|default:''}}</span></h4>
+                        <h4>Last Name: <span>{{order.customer.last_name|default:''}}</span></h4>
+                        <h4>Phone: <span>{{order.customer.phone}}</span></h4>
+                        <h4>Location: <span>{{order.customer.location|default:''}}</span></h4>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal fade" id="exampleTailor{{order.tailor.id}}" tabindex="-1" aria-labelledby="exampleTailorLabel{{order.tailor.id}}" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleTailorLabel{{order.tailor.id}}">Tailor Detail</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <h4>First Name: <span>{{order.tailor.first_name|default:''}}</span></h4>
+                        <h4>Last Name: <span>{{order.tailor.last_name|default:''}}</span></h4>
+                        <h4>Phone: <span>{{order.tailor.phone}}</span></h4>
+                        <h4>Location: <span>{{order.tailor.location|default:''}}</span></h4>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal fade" id="exampleDeliveryBoy{{order.delivery_boy.id}}" tabindex="-1" aria-labelledby="exampleDeliveryBoyLabel{{order.delivery_boy.id}}" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleDeliveryBoyLabel{{order.delivery_boy.id}}">Delivery Boy Detail</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <h4>First Name: <span>{{order.delivery_boy.first_name|default:''}}</span></h4>
+                        <h4>Last Name: <span>{{order.delivery_boy.last_name|default:''}}</span></h4>
+                        <h4>Phone: <span>{{order.delivery_boy.phone}}</span></h4>
+                        <h4>Location: <span>{{order.delivery_boy.location|default:''}}</span></h4>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+              </tbody>
+            </table>
+            <span style="padding-left: 10px;"><strong>Total: {{total}}</strong></span>
+          </div>
+        </div>
+        <!-- <div class="col-lg-12">
+          <div class="admin-appuser-application-marchent">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link tab-btn active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                  type="button" role="tab" aria-controls="home" aria-selected="true"><i class="fa fa-user-plus"
+                    aria-hidden="true"></i>Pending Orders</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link tab-btn" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                  type="button" role="tab" aria-controls="profile" aria-selected="false"><i class="fa fa-mobile"
+                    aria-hidden="true"></i>Completed Orders</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link tab-btn" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                  type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa fa-users"
+                    aria-hidden="true"></i>Canceled Orders</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link tab-btn" id="picked-tab" data-bs-toggle="tab" data-bs-target="#picked"
+                  type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa fa-users"
+                    aria-hidden="true"></i>Picked For Delivery Orders</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link tab-btn" id="delivered-tab" data-bs-toggle="tab" data-bs-target="#delivered"
+                  type="button" role="tab" aria-controls="contact" aria-selected="false"><i class="fa fa-users"
+                    aria-hidden="true"></i>Delivered Orders</button>
+              </li>
+            </ul>
+          </div>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div class="app-user-main-heading-area">
+                <h2 class="noti_detail">Pending Orders</h2>
+              </div>
+              <div class="admin-appuser-table-area">
+                <table class="table" id="example1">
+                  <thead>
+                    <tr>
+                      <th>Sr No</th>
+                      <th>Customer</th>
+                      <th>Tailor</th>
+                      <th>Delivery Boy</th>
+                      <th>Status</th>
+                      <th>View Details</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if pending_orders %}
+                    {% for pending_order in pending_orders %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{pending_order.customer}}</td>
+                      <td>{{pending_order.tailor}}</td>
+                      <td>{{pending_order.delivery_boy}}</td>
+                      <td>{{pending_order.status}}</td>
+                      <td style="text-align:center;"><a href="{% url 'order-deatil' pending_order.id %}"
+                        class="mange-admins-edit-btn"><i class="fas fa-eye"></i></a></td>
+                      <td>
+                        <a href="{% url 'update-order' pending_order.id %}" class="mange-admins-edit-btn"><i
+                            class="fas fa-edit"></i></a>
+                        <a data-bs-toggle="modal" data-bs-target="#ModalOrderP{{pending_order.id}}"
+                          class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                      </td>
+                    </tr>
+                    <div class="modal fade" id="ModalOrderP{{pending_order.id}}" tabindex="-1"
+                      aria-labelledby="ModalLabelOrderP{{pending_order.id}}" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content innerDiv-model-dialog">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabelOrderP{{pending_order.id}}">Delete
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <hr class="p-0 m-0">
+                          <div class="modal-body my-4">
+                            Are You Sure, Really Want To Delete ?
+                          </div>
+                          <hr class="p-0 m-0">
+                          <div class="modal-footer">
+                            <button type="button" class="download-invoice-btn" data-bs-dismiss="modal">Close</button>
+                            <a href="{% url 'delete-order' pending_order.id %}"><button type="button"
+                                class="download-invoice-btn">Delete</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="app-user-main-heading-area">
+                <h2>Completed Orders</h2>
+              </div>
+              <div class="admin-appuser-table-area">
+                <table class="table" id="example1">
+                  <thead>
+                    <tr>
+                      <th>Sr No</th>
+                      <th>Customer</th>
+                      <th>Tailor</th>
+                      <th>Delivery Boy</th>
+                      <th>Status</th>
+                      <th>View Details</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if completed_orders %}
+                    {% for completed_order in completed_orders %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{completed_order.customer}}</td>
+                      <td>{{completed_order.tailor}}</td>
+                      <td>{{completed_order.delivery_boy}}</td>
+                      <td>{{completed_order.status}}</td>
+                      <td style="text-align:center;"><a href="{% url 'order-deatil' completed_order.id %}"
+                        class="mange-admins-edit-btn"><i class="fas fa-eye"></i></a></td>
+                      <td>
+                        <a href="{% url 'update-order' completed_order.id %}" class="mange-admins-edit-btn"><i
+                            class="fas fa-edit"></i></a>
+                        <a data-bs-toggle="modal" data-bs-target="#ModalOrderC{{completed_order.id}}"
+                          class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                      </td>
+                    </tr>
+                    <div class="modal fade" id="ModalOrderC{{completed_order.id}}" tabindex="-1"
+                      aria-labelledby="ModalLabelOrderC{{completed_order.id}}" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content innerDiv-model-dialog">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabelOrderC{{completed_order.id}}">Delete
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <hr class="p-0 m-0">
+                          <div class="modal-body my-4">
+                            Are You Sure, Really Want To Delete ?
+                          </div>
+                          <hr class="p-0 m-0">
+                          <div class="modal-footer">
+                            <button type="button" class="download-invoice-btn" data-bs-dismiss="modal">Close</button>
+                            <a href="{% url 'delete-order' completed_order.id %}"><button type="button"
+                                class="download-invoice-btn">Delete</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+              <div class="app-user-main-heading-area">
+                <h2>Canceled Orders</h2>
+              </div>
+              <div class="admin-appuser-table-area">
+                <table class="table" id="example1">
+                  <thead>
+                    <tr>
+                      <th>Sr No</th>
+                      <th>Customer</th>
+                      <th>Tailor</th>
+                      <th>Delivery Boy</th>
+                      <th>Status</th>
+                      <th>View Details</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if canceled_orders %}
+                    {% for canceled_order in canceled_orders %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{canceled_order.customer}}</td>
+                      <td>{{canceled_order.tailor}}</td>
+                      <td>{{canceled_order.delivery_boy}}</td>
+                      <td>{{canceled_order.status}}</td>
+                      <td style="text-align:center;"><a href="{% url 'order-deatil' canceled_order.id %}"
+                        class="mange-admins-edit-btn"><i class="fas fa-eye"></i></a></td>
+                      <td>
+                        <a href="{% url 'update-order' canceled_order.id %}" class="mange-admins-edit-btn"><i
+                            class="fas fa-edit"></i></a>
+                        <a data-bs-toggle="modal" data-bs-target="#ModalOrderX{{canceled_order.id}}"
+                          class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                      </td>
+                    </tr>
+                    <div class="modal fade" id="ModalOrderX{{canceled_order.id}}" tabindex="-1"
+                      aria-labelledby="ModalLabelOrderX{{canceled_order.id}}" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content innerDiv-model-dialog">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabelOrderX{{canceled_order.id}}">Delete
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <hr class="p-0 m-0">
+                          <div class="modal-body my-4">
+                            Are You Sure, Really Want To Delete ?
+                          </div>
+                          <hr class="p-0 m-0">
+                          <div class="modal-footer">
+                            <button type="button" class="download-invoice-btn" data-bs-dismiss="modal">Close</button>
+                            <a href="{% url 'delete-order' canceled_order.id %}"><button type="button"
+                                class="download-invoice-btn">Delete</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="picked" role="tabpanel" aria-labelledby="picked-tab">
+              <div class="app-user-main-heading-area">
+                <h2>Picked For Delivery Orders</h2>
+              </div>
+              <div class="admin-appuser-table-area">
+                <table class="table" id="example1">
+                  <thead>
+                    <tr>
+                      <th>Sr No</th>
+                      <th>Customer</th>
+                      <th>Tailor</th>
+                      <th>Delivery Boy</th>
+                      <th>Status</th>
+                      <th>View Details</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if picked_for_delivery_orders %}
+                    {% for picked_for_delivery_order in picked_for_delivery_orders %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{picked_for_delivery_order.customer}}</td>
+                      <td>{{picked_for_delivery_order.tailor}}</td>
+                      <td>{{picked_for_delivery_order.delivery_boy}}</td>
+                      <td>{{picked_for_delivery_order.status}}</td>
+                      <td style="text-align:center;"><a href="{% url 'order-deatil' picked_for_delivery_order.id %}"
+                        class="mange-admins-edit-btn"><i class="fas fa-eye"></i></a></td>
+                      <td>
+                        <a href="{% url 'update-order' picked_for_delivery_order.id %}" class="mange-admins-edit-btn"><i
+                            class="fas fa-edit"></i></a>
+                        <a data-bs-toggle="modal" data-bs-target="#ModalOrderPi{{picked_for_delivery_order.id}}"
+                          class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                      </td>
+                    </tr>
+                    <div class="modal fade" id="ModalOrderPi{{picked_for_delivery_order.id}}" tabindex="-1"
+                      aria-labelledby="ModalLabelOrderPi{{picked_for_delivery_order.id}}" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content innerDiv-model-dialog">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabelOrderPi{{picked_for_delivery_order.id}}">Delete
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <hr class="p-0 m-0">
+                          <div class="modal-body my-4">
+                            Are You Sure, Really Want To Delete ?
+                          </div>
+                          <hr class="p-0 m-0">
+                          <div class="modal-footer">
+                            <button type="button" class="download-invoice-btn" data-bs-dismiss="modal">Close</button>
+                            <a href="{% url 'delete-order' picked_for_delivery_order.id %}"><button type="button"
+                                class="download-invoice-btn">Delete</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
+              <div class="app-user-main-heading-area">
+                <h2>Delivered Orders</h2>
+              </div>
+              <div class="admin-appuser-table-area">
+                <table class="table" id="example1">
+                  <thead>
+                    <tr>
+                      <th>Sr No</th>
+                      <th>Customer</th>
+                      <th>Tailor</th>
+                      <th>Delivery Boy</th>
+                      <th>Status</th>
+                      <th>View Details</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if delivered_orders %}
+                    {% for delivered_order in delivered_orders %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{delivered_order.customer}}</td>
+                      <td>{{delivered_order.tailor}}</td>
+                      <td>{{delivered_order.delivery_boy}}</td>
+                      <td>{{delivered_order.status}}</td>
+                      <td style="text-align:center;"><a href="{% url 'order-deatil' delivered_order.id %}"
+                        class="mange-admins-edit-btn"><i class="fas fa-eye"></i></a></td>
+                      <td>
+                        <a href="{% url 'update-order' delivered_order.id %}" class="mange-admins-edit-btn"><i
+                            class="fas fa-edit"></i></a>
+                        <a data-bs-toggle="modal" data-bs-target="#ModalOrderD{{delivered_order.id}}"
+                          class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                      </td>
+                    </tr>
+                    <div class="modal fade" id="ModalOrderD{{delivered_order.id}}" tabindex="-1"
+                      aria-labelledby="ModalLabelOrderD{{delivered_order.id}}" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content innerDiv-model-dialog">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabelOrderD{{delivered_order.id}}">Delete
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <hr class="p-0 m-0">
+                          <div class="modal-body my-4">
+                            Are You Sure, Really Want To Delete ?
+                          </div>
+                          <hr class="p-0 m-0">
+                          <div class="modal-footer">
+                            <button type="button" class="download-invoice-btn" data-bs-dismiss="modal">Close</button>
+                            <a href="{% url 'delete-order' delivered_order.id %}"><button type="button"
+                                class="download-invoice-btn">Delete</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

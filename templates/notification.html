@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="page-wrapper wrapper_page" style="min-height: 250px;">
+  <div class="container-fluid white_bg">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="application-detail-heading-area">
+          <h2 class="noti_detail">Manage Notifications</h2>
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags %}
+        <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <div class="table-data-search-box">
+          <div class="search">
+            <a href="{% url 'create-notification' %}" class="searchTerm">Create Notification</a>
+          </div>
+        </div>
+        <div class="manage-admins-main-area">
+          <div class="manage-admins-table-area">
+            <table class="table table-hover" id="example1">
+              <thead>
+                <tr>
+                  <th>Sr No</th>
+                  <th>Order Id</th>
+                  <th>Recipient</th>
+                  <th>Title</th>
+                  <th>Message</th>
+                  <th>Created On</th>
+                  <th>Is Seen</th>
+                  <th>View Details</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if notifications %}
+                {% for notification in notifications %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{notification.order_id.id|default:''}}</td>
+                  <td>{{notification.recipient|default:''}}</td>
+                  <td>{{notification.title}}</td>
+                  <td>{{notification.message}}</td>
+                  <td style="text-align:center;">{{notification.created_at}}</td>
+                  <td style="text-align:center;">{{notification.is_seen}}</td>
+                  <td style="text-align:center;"><a href="{% url 'notification-detail' notification.id %}"
+                      class="mange-admins-edit-btn"><i class="fas fa-eye"></i></a></td>
+                  <td>
+                    <a data-bs-toggle="modal" data-bs-target="#NotificationDel{{notification.id}}"
+                      class="mange-admins-dlt-btn"><i class="far fa-trash-alt"></i></a>
+                  </td>
+                </tr>
+                <div class="modal fade" id="NotificationDel{{notification.id}}" tabindex="-1"
+                  aria-labelledby="NotificationLabelDel{{notification.id}}" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content innerDiv-model-dialog">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="NotificationLabelDel{{notification.id}}">Delete
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <hr class="p-0 m-0">
+                      <div class="modal-body my-4">
+                        Are You Sure, Really Want To Delete ?
+                      </div>
+                      <hr class="p-0 m-0">
+                      <div class="modal-footer">
+                        <button type="button" class="download-invoice-btn" data-bs-dismiss="modal">Close</button>
+                        <a href="{% url 'delete-notification' notification.id %}"><button type="button"
+                            class="download-invoice-btn">Delete</button></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

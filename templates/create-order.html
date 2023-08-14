@@ -1,0 +1,113 @@
+<!-- {% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="page-wrapper wrapper_page">
+    <div class="page-breadcrumb bg-white white_bg">
+        <div class="row align-items-center">
+            <div class="col-lg-9 col-md-4 col-sm-4 col-xs-12 mb-3">
+                <h4 class="page-title title_page">Create Order</h4>
+            </div>
+        </div>
+        <div class="dashboardBox">
+            <div class="container-fluid">
+                <div class="profile-input-box-area">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags %}
+                    <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    <form class="contact-form-main-area" action="" method="post" id="paymentFrm">
+                        {% csrf_token %}
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Customer</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="customer" name="customer" required="">
+                                        <option value="">Select Customer</option>
+                                        {% for customer in customers %}
+                                        <option name="customer" id="customer" value="{{customer.id}}">
+                                            {{customer}}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Tailor</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="tailor" name="tailor" required="">
+                                        <option value="">Select Tailor</option>
+                                        {% for tailor in tailors %}
+                                        <option name="tailor" id="tailor" value="{{tailor.id}}">
+                                            {{tailor}}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Delivery Boy</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="delivery_boy" name="delivery_boy">
+                                        <option value="">Select Delivery Boy</option>
+                                        {% for delivery_boy in delivery_boys %}
+                                        <option name="delivery_boy" id="delivery_boy" value="{{delivery_boy.id}}">
+                                            {{delivery_boy}}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Select Services</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="service" name="service" required multiple>
+                                        {% for service in services %}
+                                        <option name="service" id="service" value="{{service.id}}">
+                                            {{service}} | {{service.type}} | ${{service.price}} | {{service.category}}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Customer Delivery Address</label>
+                                <textarea name="delivery_address" id="delivery_address" cols="30" rows="10" class="form-control field change_border" placeholder="Enter Customer Delivery Address" autofocus="" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Status</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="status" name="status" required>
+                                        {% for status in model.CHOICES %}
+                                        <option value="{{ status.0 }}">{{ status.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="contact-form-submint-btn-area">
+                                <button type="submit" class="contact-form-submint-btn btn_submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %} -->

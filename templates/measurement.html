@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="page-wrapper" style="min-height: 250px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="application-detail-heading-area">
+                    <h2 class="noti_detail">{% firstof customer.first_name customer.last_name customer %} Measurements Detail</h2>
+                </div>
+                <div class="admin-detail-main-area">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="admin-detail-list-area">
+                                <div class="admin-contact-detail-area">
+                                    <h4>Sleeve: <span>{{customer.sleeve|default:''}}</span></h4>
+                                    <h4>Neck: <span>{{customer.neck|default:''}}</span></h4>
+                                    <h4>Hip: <span>{{customer.hip|default:''}}</span></h4>
+                                    <h4>Waist To Ankle: <span>{{customer.waist_to_ankle}}</span></h4>
+                                    <h4>Round Arm: <span>{{customer.round_arm|default:''}}</span></h4>
+                                    <h4>Knee: <span>{{customer.knee|default:''}}</span></h4>
+                                    <h4>Thigh: <span>{{customer.thigh|default:''}}</span></h4>
+                                    <h4>Leg Length: <span>{{customer.leg_length|default:''}}</span></h4>
+                                    <h4>Waist To Floor: <span>{{customer.waist_to_floor|default:''}}</span></h4>
+                                    <h4>Aditional Information: <span>{{customer.aditional_information|default:''}}</span></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="admin-contact-detail-area">
+                                <h4>Waist: <span>{{customer.waist|default:''}}</span></h4>
+                                <h4>Shoulder: <span>{{customer.shoulder|default:''}}</span></h4>
+                                <h4>Waist To Heap: <span>{{customer.waist_to_heap|default:''}}</span></h4>
+                                <h4>Length Of Arm: <span>{{customer.length_of_arm|default:''}}</span></h4>
+                                <h4>Shoulder To Waist: <span>{{customer.shoulder_to_waist|default:''}}</span></h4>
+                                <h4>Back Width: <span>{{customer.back_width|default:''}}</span></h4>
+                                <h4>Calf: <span>{{customer.calf|default:''}}</span></h4>
+                                <h4>Ankle: <span>{{customer.ankle|default:''}}</span></h4>
+                                <h4>Crotch Depth: <span>{{customer.crotch_depth|default:''}}</span></h4>
+                                <h4>Elbow Width: <span>{{customer.elbow_width|default:''}}</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

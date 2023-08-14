@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<div class="page-wrapper wrapper_page" style="min-height: 250px;">
+    <div class="container-fluid fluid_container responsive_container pt-3 white_bg">
+        <div class="row responsive_row">
+            <div class="col-lg-12">
+                <div class="application-detail-heading-area">
+                    <h2 class="noti_detail">Settings</h2>
+                </div>
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags %}
+            <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            <div class="col-lg-12">
+                <div class="setting-tab-detail-main-area main_area_tab_setting">
+                    <div class="setting-tab-main-area tab_setting_main_area">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active tab-btn link_nav" id="manage-profile-tab"
+                                    data-bs-toggle="tab" data-bs-target="#manage-profile" type="button" role="tab"
+                                    aria-controls="manage-profile" aria-selected="false"><i class="fa fa-user"
+                                        aria-hidden="true">
+                                    </i><span class="responsive_icon">Manage Profile</span></button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link tab-btn link_nav" id="change-password-tab" data-bs-toggle="tab"
+                                    data-bs-target="#change-password" type="button" role="tab"
+                                    aria-controls="change-password" aria-selected="true"><i class="fa fa-lock"
+                                        aria-hidden="true"></i><span class="responsive_icon">Change
+                                        Password</span></button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="manage-profile" role="tabpanel"
+                            aria-labelledby="manage-profile-tab">
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="setting-tab-heading-area">
+                                        <h2>Personal Info</h2>
+                                    </div>
+                                    <div class="setting-profile-detail-main-area responsive_width">
+                                        <div class="user-detail-main-area">
+                                            <div class="row space_left">
+                                                <div class="col-lg-6 col_lg_six">
+                                                    <div class="personal-information-heading">
+                                                        <h2>First Name</h2>
+                                                        <h2>Last Name</h2>
+                                                        <h2>Phone</h2>
+                                                        <h2>Location</h2>
+                                                        <h2>Created On</h2>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col_lg_six">
+                                                    <div class="personal-information-details">
+                                                        <p>{% firstof request.user.first_name '-' %}</p>
+                                                        <p>{% firstof request.user.last_name '-' %}</p>
+                                                        <p>{% firstof request.user.phone '-' %}</p>
+                                                        <p>{% firstof request.user.location '-' %}</p>
+                                                        <p>{{request.user.created_at}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="setting-tab-heading-area">
+                                        <h2>Personal Details</h2>
+                                    </div>
+                                    <div class="setting-profile-detail-input-area">
+                                        <form class="contact-form-main-area" action="{% url 'setting' %}" method="post"
+                                            id="paymentFrm">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>First Name</label>
+                                                        <input type="text" class="form-control field change_border"
+                                                            name="first-name" placeholder="Enter First Name"
+                                                            autofocus="" id="first-name" maxlength="16"
+                                                            value="{{request.user.first_name|default:''}}" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Last Name</label>
+                                                        <input type="text" class="form-control field change_border"
+                                                            name="last-name" placeholder="Enter Last Name" autofocus=""
+                                                            id="last-name" maxlength="16"
+                                                            value="{{request.user.last_name|default:''}}" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Phone</label>
+                                                        <input type="text" pattern="\+[0-9]{8,14}" title="Phone Number With Country Code" class="form-control field change_border" name="phone" 
+                                                            placeholder="Enter Contact Number" autofocus="" id="phone" maxlength="16" value="{{request.user.phone|default:''}}" required="" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Location</label>
+                                                        <input type="text" class="form-control field change_border"
+                                                            name="location" placeholder="Enter Location" autofocus=""
+                                                            id="location" maxlength="16"
+                                                            value="{{request.user.location|default:''}}" required> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="contact-form-submint-btn-area">
+                                                        <button type="submit"
+                                                            class="contact-form-submint-btn btn_submit">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="change-password" role="tabpanel"
+                            aria-labelledby="change-password-tab">
+                            <form class="contact-form-main-area" action="{% url 'change-password' %}" method="post"
+                                id="passwordFrm">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="setting-tab-heading-area">
+                                            <h2>Change Password</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="change-password-input-box-area">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="change-password-lavel-area">
+                                                <h2>Old Password</h2>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="change-password-input-box">
+                                                <input type="password" id="old_password" name="old_password"
+                                                    class="form-control change_border" placeholder="Enter Old Password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="change-password-input-box-area">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="change-password-lavel-area">
+                                                <h2>New Password</h2>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="change-password-input-box">
+                                                <input type="password" id="new_password" name="new_password"
+                                                    class="form-control change_border" placeholder="Enter New Password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="change-password-input-box-area">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="change-password-lavel-area">
+                                                <h2>Confirm Password</h2>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="change-password-input-box">
+                                                <input type="password" id="confirm_password" name="confirm_password"
+                                                    class="form-control change_border"
+                                                    placeholder="Enter Confirm Password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="change-password-submit-area">
+                                    <button type="submit" class="submit-password-change-btn btn_submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    const form = document.getElementById('paymentFrm');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'setting' %}",
+            data: {
+                phone: $('#phone').val(),
+                location: $('#location').val(),
+                firstName: $('#first-name').val(),
+                lastName: $('#last-name').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                dataType: "json",
+
+            },
+            success: function (data) {
+                location.reload();
+            },
+            failure: function () {
+            }
+        });
+    });
+
+
+    const passwordForm = document.getElementById('passwordFrm');
+
+    passwordForm.addEventListener('submit', e => {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'change-password' %}",
+            data: {
+                oldPassword: $('#old_password').val(),
+                newPassword: $('#new_password').val(),
+                confirmPassword: $('#confirm_password').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                dataType: "json",
+
+            },
+            success: function (data) {
+                location.reload();
+            },
+            failure: function () {
+            }
+        });
+    });
+</script>
+
+
+{% endblock content %}

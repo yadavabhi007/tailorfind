@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="page-wrapper wrapper_page">
+    <div class="page-breadcrumb bg-white white_bg">
+        <div class="row align-items-center">
+            <div class="col-lg-9 col-md-4 col-sm-4 col-xs-12 mb-3">
+                <h4 class="page-title title_page">Create Earning</h4>
+            </div>
+        </div>
+        <div class="dashboardBox">
+            <div class="container-fluid">
+                <div class="profile-input-box-area">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags %}
+                    <script>swal("Tailor Find!", "{{message}}", "{{message.tags}}");</script>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    <form class="contact-form-main-area" action="" method="post" id="paymentFrm">
+                        {% csrf_token %}
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Order</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="order" name="order" required="" onchange="orderID()">
+                                        <option value="">Select Order</option>
+                                        {% for order in orders %}
+                                        <option value="{{order.id}}">
+                                            {{order}}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Tailor</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="tailor"
+                                    placeholder="Tailor" autofocus="" id="tailor" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Total Service</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="total_service"
+                                    placeholder="Total Service" autofocus="" id="total_service" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="text" maxlength="16" class="form-control field change_border" name="amount"
+                                    placeholder="Amount" autofocus="" id="amount" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="service">Choose Status</label>
+                                <div class="profile-input-box-area select-parent">
+                                    <select class="form-control change_border" id="status" name="status" required>
+                                        {% for status in model.CHOICES %}
+                                        <option value="{{ status.0 }}">{{ status.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Paid Date</label>
+                                <input type="date" class="form-control field change_border" name="paid_date"
+                                    placeholder="Enter Paid Date" autofocus="" id="paid_date">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Request Date</label>
+                                <input type="date" class="form-control field change_border" name="request_date"
+                                    placeholder="Enter Request Date" autofocus="" id="request_date">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="contact-form-submint-btn-area">
+                                <button type="submit" class="contact-form-submint-btn btn_submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const orderID = () => {
+        const order = document.getElementById("order").value;
+        console.log(order);
+        $.ajax({
+          method: "GET",
+          url: "{% url 'select-order' %}",
+          data: {
+            order_id: order,
+          },
+          success: function (data) {
+            document.getElementById("tailor").value = data.tailor;
+            console.log(data.tailor)
+            document.getElementById("total_service").value = data.total_service;
+            document.getElementById("amount").value = data.amount;
+          },
+        });
+      };
+</script>
+{% endblock content %}

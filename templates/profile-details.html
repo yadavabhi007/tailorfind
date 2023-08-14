@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="page-wrapper white_bg" style="min-height: 250px;">
+    <div class="container-fluid fluid_container pt-3">
+        <div class="row responsive_row">
+            <div class="application-detail-heading-area">
+                <h2 class="noti_detail">Profile</h2>
+            </div>
+            <div class="col-lg-5 lg_col">
+                <div class="profile-detail-main-area main_area_profile_detail responsive_width">
+                    <div class="user-photo-main-area">
+                        <div class="user-img-area">
+                            <img src="images/user-img.jpg" alt="user img">
+                        </div>
+                        <div class="change-photo-btn-area">
+                            <label for="edit" class="change-poto-btn edit_btn">
+                                <i class="fa fa-camera" aria-hidden="true"></i>
+                            </label>
+                            <input type="file" id="edit" class="edit-file">
+                        </div>
+                    </div>
+
+                    <div class="user-detail-main-area">
+                        <div class="row space_left">
+                            <div class="col-lg-6 col_lg_six">
+                                <div class="personal-information-heading">
+                                    <h2>Full Name</h2>
+                                    <h2>Email ID</h2>
+                                    <h2>Phone</h2>
+                                    <h2>Gender</h2>
+                                    <h2>Country</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col_lg_six">
+                                <div class="personal-information-details">
+                                    <p>Jhon Smith</p>
+                                    <p>jhonsmiht@gmail.com</p>
+                                    <p>9874563214</p>
+                                    <p>Male</p>
+                                    <p>United States</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="profile-detail-input-area input_area_profile_detail">
+                    <form class="contact-form-main-area" action="payment.php" method="POST" id="paymentFrm">
+                        <div class="row space_left">
+                            <div class="col-lg-6 lg_col_6">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" value="Jhon" class="form-control field change_border"
+                                        name="holdername" placeholder="Enter First Name" autofocus="" required=""
+                                        id="name" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 lg_col_6">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" value="Smith" class="form-control field change_border"
+                                        name="holdername" placeholder="Enter Last Name" autofocus="" required=""
+                                        id="name" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 lg_col_6">
+                                <div class="form-group">
+                                    <label>Email ID</label>
+                                    <input type="email" value="jhonsmiht@gmail.com"
+                                        class="form-control field change_border" name="holdername"
+                                        placeholder="Enter Email ID" autofocus="" required="" id="name" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 lg_col_6">
+                                <div class="form-group">
+                                    <label>Contact Number</label>
+                                    <input type="tel" value="9874563214" class="form-control field change_border"
+                                        name="holdername" placeholder="Enter Contact Number" autofocus="" required=""
+                                        id="name" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 lg_col_6">
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <div class="profile-input-box-area">
+                                        <select class="form-control change_border" name="cars" id="cars" disabled>
+                                            <option value="volvo">Select Gender</option>
+                                            <option value="volvo">Male</option>
+                                            <option value="saab">Female</option>
+                                            <option value="opel">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 lg_col_6">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control field change_border" name="holdername"
+                                        placeholder="Enter Address" autofocus="" required="" id="name" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 lg_col_6">
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <div class="profile-input-box-area">
+                                        <select class="form-control change_border" name="cars" id="cars" disabled>
+                                            <option value="volvo" readonly>Select Country</option>
+                                            <option value="volvo">India</option>
+                                            <option value="saab">United States</option>
+                                            <option value="opel">Australia</option>
+                                            <option value="audi">Canada</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 lg_col_6">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <div class="profile-input-box-area">
+                                        <select class="form-control change_border" name="cars" id="cars" disabled>
+                                            <option value="volvo">Select State</option>
+                                            <option value="volvo">India</option>
+                                            <option value="saab">United States</option>
+                                            <option value="opel">Australia</option>
+                                            <option value="audi">Canada</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 lg_col_6">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <div class="profile-input-box-area">
+                                        <select class="form-control change_border" name="cars" id="cars" disabled>
+                                            <option value="volvo">Select City</option>
+                                            <option value="volvo">India</option>
+                                            <option value="saab">United States</option>
+                                            <option value="opel">Australia</option>
+                                            <option value="audi">Canada</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 lg_col_6">
+                                <div class="form-group">
+                                    <label>Postal/ZIP Code</label>
+                                    <input type="text" class="form-control field change_border" name="holdername"
+                                        placeholder="Enter Postal/ZIP Code" autofocus="" required="" id="name" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 lg_col_6">
+                                <div class="contact-form-submint-btn-area">
+                                    <button type="submit" class="contact-form-submint-btn btn_submit">Submit</submit>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

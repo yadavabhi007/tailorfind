@@ -1,0 +1,393 @@
+@media (max-width: 500px) {
+    .topbar .navbar-header {
+        background-color: #283e51 !important;
+    }
+
+    .topbar .waves-effect {
+        font-size: 25px;
+        color: #fff !important;
+    }
+
+    .topbar .fa-bars {
+        display: none;
+    }
+
+    .page-breadcrumb {
+        padding: 13px 10px;
+    }
+
+    /* profile page */
+    .wrapper_page .col_lg_six {
+        width: 48%;
+    }
+
+    .wrapper_page .responsive_width {
+        width: 100%;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 0px;
+    }
+
+    .wrapper_page .space_left {
+        justify-content: space-between;
+        padding-left: 0px;
+    }
+
+    .input_area_profile_detail {
+        border-top-right-radius: 0px;
+    }
+
+    /* My credit page */
+    .setting-tab-main-area .nav-tabs .nav-link {
+        padding: 10px 20px 10px 20px;
+    }
+
+    /* Setting page */
+    .responsive_icon {
+        display: none;
+    }
+
+    .setting-tab-main-area .tab-btn i {
+        margin: 0px;
+    }
+
+    .wrapper_page .responsive_container {
+        padding: 15px;
+    }
+
+    /* Notification page */
+    .faq-accordian-main-area .items_accordion {
+        padding: 0px 10px 0px 10px;
+    }
+
+    .notification-user-img img {
+        border-radius: 6%;
+    }
+
+    .notification-heading-main-area h2 {
+        font-size: 12px;
+        font-weight: bolder;
+    }
+
+    .notification-heading-main-area p {
+        font-size: 12px;
+    }
+
+    /* faq page */
+    .responsive_bg {
+        padding: 13px 10px;
+    }
+
+    .page-breadcrumb .title_page {
+        margin-bottom: 7px;
+        margin-left: 18px;
+    }
+
+    .faq-accordian-main-area .accordion-item {
+        padding: 10px;
+    }
+
+    .faq-accordian-main-area .accordion-button {
+        padding: 0px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    /* notification detail page  */
+    .send_btn {
+        background-color: #283e51;
+        font-size: 12px;
+    }
+
+    .application-detail-heading-area h2 {
+        font-size: 22px;
+        margin-top: 15px;
+    }
+
+    /* Forget password page */
+    .forget-password-detail-area {
+        position: relative;
+        display: block;
+        top: 0;
+        left: 0;
+    }
+
+    .forget-password-left-area {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .forget-password-left-area img {
+        width: 150px;
+    }
+
+    .forget-password-input-area {
+        height: 0%;
+    }
+
+    .right_area {
+        position: absolute;
+        top: 23%;
+        left: 0;
+        width: 92%;
+        margin: 15px;
+    }
+
+    .btn_area {
+        margin: 50px 0px 50px 0px;
+    }
+
+    .copyright_area {
+        position: absolute;
+        top: 110%;
+        left: 12px;
+    }
+    /* login page */
+    .login-resset-btn-area .forget_login {
+        margin: 5px 10px 20px 38px;
+        padding-left: 125px;
+    }
+    .login-resset-btn-area .submit_area {
+        margin: 20px 0px 20px 0px;
+    }
+    .forget-password-input-area p {
+        margin: 10px 0px 18px 0px;
+    }
+
+    /* sign in page */
+    .responsive_height {
+        height: 130vh;
+    }
+    .responsive_area {
+        margin-top: -50px;
+    }
+    .forget-password-input-area.middel-heading-main-area p {
+        margin: 15px 0px 10px 0px;
+    }
+    .responsive_footer {
+        top: 99%;
+    }
+    /* No of form sign  page*/
+    .application-detail-heading-area .info_personal {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+    .application-detail-heading-area .responsive_info {
+        font-size: 17px;
+        margin-top: 6px;
+    }
+
+    .table-data-search-box .search {
+        justify-content: flex-end;
+    }
+
+    .table-data-search-box .responsive_search {
+        margin-left: 14px;
+    }
+
+    .table-data-search-box .searchTerm {
+        width: 50%;
+        height: 25px;
+    }
+
+    .table-data-search-box .searchButton {
+        height: 25px;
+    }
+
+    .table {
+        width: max-content;
+    }
+
+    .borderRight {
+        border-right: none;
+    }
+
+    .borderLeft {
+        border-left: none;
+    }
+
+    .pe-0 {
+        padding-right: 10px !important;
+    }
+
+    .ps-0 {
+        padding-left: 12px !important;
+    }
+
+    .ps-1 {
+        padding-left: 0px !important;
+    }
+
+    .partborder {
+        text-align: center;
+    }
+
+    .remove-inline {
+        display: inline-block;
+    }
+
+    .inputForm li input {
+        width: 100%;
+    }
+
+    .form-check-input[type=checkbox] {
+        margin-top: 0px;
+    }
+
+    .authorizeInput input {
+        width: 250px;
+    }
+
+    .inputbgColorborder {
+        margin: 0px;
+    }
+
+    .yourSignaturandDate input.signatureInput {
+        width: 59%;
+    }
+    
+    .yourSignaturandDate input.dateInput {
+        width: 82%;
+    }
+
+    .yourSignaturandDate input.width-responsive {
+        width: 48%;
+    }
+
+    .yourSignaturandDate input.part-third {
+        width: 42%;
+    }
+
+    .yourSignaturandDate input.part-third-sec {
+        width: 79%;
+    }
+    /* FORM INSIDE TAB */
+    .text-phone {
+        text-align: center;
+    }
+
+    .authorization {
+        text-align: start;
+    }
+
+    .borderleftRight {
+        padding: 10px;
+    }
+
+    .ombNo {
+        text-align: center;
+    }
+
+}
+/*  FOR TABLET */
+@media (min-width: 501px) and (max-width: 768px) {
+    /*  dashtop page */
+    #main-wrapper .top_header {
+        background-image: linear-gradient(to left, #4b79a1, #283e51 65%) !important;
+    }
+
+    /* setting page */
+    .setting-tab-main-area .nav-tabs .link_nav {
+        padding: 10px 22px 10px 22px;
+    }
+
+    .responsive_row {
+        flex-direction: column;
+    }
+
+    .space_left {
+        justify-content: space-evenly;
+    }
+
+    .col_lg_six {
+        width: 25%;
+    }
+
+    .main_area_profile_detail {
+        padding: 30px 20px 30px 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .input_area_profile_detail {
+        border-radius: 5px;
+    }
+
+    /* no of form page */
+    .table {
+        width: max-content;
+    }
+
+    .lg_col_12 {
+        width: 50vw;
+    }
+
+    /* contact-us page */
+    .application-detail-heading-area h2 {
+        margin: 15px 0px 15px 0px;
+    }
+
+    /* Login page */
+    .left_area {
+        text-align: center;
+    }
+
+    .forget-password-left-area {
+        width: 100%;
+        display: block;
+    }
+
+    .forget-password-left-area img {
+        width: 150px;
+    }
+
+    .forget-password-input-area {
+        width: 0%;
+    }
+
+    .right_area {
+        position: absolute;
+        top: 18%;
+        right: 23%;
+    }
+    .copyright_area {
+        position: absolute;
+        top: 100%;
+        left: 23px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+    /* dashtop page */
+    #main-wrapper .top_header {
+        background-image: linear-gradient(to left, #4b79a1, #283e51 70%) !important;
+    }
+    .copyright_area {
+        left: 84px;
+    }
+}
+@media (max-height: 500px) {
+
+     /*  dashtop page */
+     #main-wrapper .responsive_head {
+        background-image: linear-gradient(to left, #4b79a1, #283e51 65%) !important;
+    }
+    
+    #main-wrapper .navbar-header {
+        background: none !important;
+    }
+    .topbar .waves-effect {
+        font-size: 25px;
+        color: #fff !important;
+    }
+
+    .topbar .fa-bars {
+        display: none;
+    }
+
+    .page-breadcrumb {
+        padding: 13px 10px;
+    }
+
+}
